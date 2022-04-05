@@ -1,6 +1,5 @@
 def play(player, flop, current_bet, players_still_in):
-
-    pass
+    return 'fold'
 #no
 # return formatting:
 # for fold, return 'fold'
