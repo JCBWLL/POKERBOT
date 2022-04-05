@@ -200,7 +200,7 @@ def play(player, flop, current_bet, players_still_in):
         if best_play(hand) in POKER_ORDER:
             return 'raise ' + str(round(player['funds'] / 2))
         else:
-            return 'call'
+            return 'raise 10'
     
 # return formatting:
 # for fold, return 'fold'

@@ -1,5 +1,9 @@
 def play(player, flop, current_bet, players_still_in):
-    return 'fold'
+
+    if current_bet == 10:
+        return 'call'
+    else:
+        return 'fold'
 #no
 # return formatting:
 # for fold, return 'fold'
