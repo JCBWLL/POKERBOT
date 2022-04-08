@@ -189,6 +189,24 @@ def get_play_type(play):
                 if is_four_kind(play):
                     return 'four of a kind'
 
+def is_four(card1, card2, card3, card4):
+    if RANK_ARRAY.index(card1[0]) == RANK_ARRAY.index(card2[0]) and RANK_ARRAY.index(card1[0]) == RANK_ARRAY.index(
+            card3[0]) and RANK_ARRAY.index(card1[0]) == RANK_ARRAY.index(card4[0]):
+        return True
+    else:
+        return False
+
+
+def is_four_kind(cards):
+    card = sort_cards(cards)
+    if is_four(card[0], card[1], card[2], card[3]):
+        return True
+    elif is_four(card[1], card[2], card[3], card[4]):
+        return True
+    else:
+        return False
+
+
 
 def play(player, flop, current_bet, players_still_in):
 
