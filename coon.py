@@ -1,4 +1,4 @@
-def play(player, flop, current_bet, players_still_in):
+def play(player, flop, current_bet, players_still_in, is_first_round):
     choice = 10
     
     return 'fold'

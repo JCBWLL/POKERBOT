@@ -102,7 +102,7 @@ while len(flop) < 5:
     
     
     for player in players:
-        play = player['play'](player, [], 10, 3)
+        play = player['play'](player, [], 10, 3, True)
         print(play)
         if play.split(' ')[0] == 'raise':
             play = play.split(' ')

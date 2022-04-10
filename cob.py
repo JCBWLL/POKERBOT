@@ -1,6 +1,7 @@
 import random
 import itertools
 from stat import FILE_ATTRIBUTE_NO_SCRUB_DATA
+from subprocess import call
 
 RANK_ORDER = '1234567890JQKA'
 SUIT_ORDER = 'DCHS'
@@ -208,17 +209,23 @@ def is_four_kind(cards):
 
 
 
-def play(player, flop, current_bet, players_still_in):
+def play(player, flop, current_bet, players_still_in, is_first_round):
 
     hand = player['hand'] + flop
 
     if current_bet > player['funds']:
         return 'fold'
     else:
-        if best_play(hand) in POKER_ORDER:
-            return 'raise ' + str(round(player['funds'] / 2))
-        else:
-            return 'raise 10'
+        if len(flop) == 0:
+            if best_play(hand) in POKER_ORDER or best_play(hand) == 'four of a kind':
+                return 'raise ' + str(round(player['funds'] / 2))
+            elif best_play(hand) == 'pair':
+                return 'raise 10'
+            else:
+                return 'call'
+        elif len(flop) == 3:
+            if best_play(hand) in POKER_ORDER and POKER_ORDER.index(best_play(hand)) >= POKER_ORDER.index('flush'):
+                return 'raise '
     
 # return formatting:
 # for fold, return 'fold'
