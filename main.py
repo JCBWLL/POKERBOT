@@ -32,6 +32,7 @@ for i in range(1,number_of_players+1):
     players.append({'name': name, 'hand': hand, 'funds': funds, 'current_bet': 10, 'still_in': True, 'previous_play': '',})
 
 play_functions = [coon.play, jak.play, cob.play]
+random.shuffle(play_functions)
 for player in players:
     player['play'] = play_functions[0]
     play_functions.pop(0)
