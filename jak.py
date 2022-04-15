@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import itertools
 
 cards = ['AD','JS','4D','5C','KH']
@@ -102,9 +101,6 @@ def evaluate_hand(hand):
 
 
 def play(player, flop, current_bet, players_still_in):
-=======
-def play(player, flop, current_bet, players_still_in, is_first_round):
->>>>>>> c79526febadf8819a54170fe0ccdd775d4c15cd1
 
         return 'fold'
 #no
