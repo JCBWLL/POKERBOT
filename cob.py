@@ -1,6 +1,7 @@
 import random
 import itertools
 from stat import FILE_ATTRIBUTE_NO_SCRUB_DATA
+from subprocess import call
 
 RANK_ORDER = '1234567890JQKA'
 SUIT_ORDER = 'DCHS'
@@ -189,18 +190,42 @@ def get_play_type(play):
                 if is_four_kind(play):
                     return 'four of a kind'
 
+def is_four(card1, card2, card3, card4):
+    if RANK_ARRAY.index(card1[0]) == RANK_ARRAY.index(card2[0]) and RANK_ARRAY.index(card1[0]) == RANK_ARRAY.index(
+            card3[0]) and RANK_ARRAY.index(card1[0]) == RANK_ARRAY.index(card4[0]):
+        return True
+    else:
+        return False
 
-def play(player, flop, current_bet, players_still_in):
+
+def is_four_kind(cards):
+    card = sort_cards(cards)
+    if is_four(card[0], card[1], card[2], card[3]):
+        return True
+    elif is_four(card[1], card[2], card[3], card[4]):
+        return True
+    else:
+        return False
+
+
+
+def play(player, flop, current_bet, players_still_in, is_first_round):
 
     hand = player['hand'] + flop
 
     if current_bet > player['funds']:
         return 'fold'
     else:
-        if best_play(hand) in POKER_ORDER:
-            return 'raise ' + str(round(player['funds'] / 2))
-        else:
-            return 'raise 10'
+        if len(flop) == 0:
+            if best_play(hand) in POKER_ORDER or best_play(hand) == 'four of a kind':
+                return 'raise ' + str(round(player['funds'] / 2))
+            elif best_play(hand) == 'pair':
+                return 'raise 10'
+            else:
+                return 'call'
+        elif len(flop) == 3:
+            if best_play(hand) in POKER_ORDER and POKER_ORDER.index(best_play(hand)) >= POKER_ORDER.index('flush'):
+                return 'raise '
     
 # return formatting:
 # for fold, return 'fold'
