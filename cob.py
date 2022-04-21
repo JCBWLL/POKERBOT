@@ -225,10 +225,13 @@ def play(player, flop, current_bet, players_still_in, is_first_round):
                 return 'call'
         elif len(flop) == 3:
             if best_play(hand) in POKER_ORDER and POKER_ORDER.index(best_play(hand)) >= POKER_ORDER.index('flush'):
-                return 'raise '
+                return 'raise ' + str(0.8* player['funds'])
+            else:
+                return 'call'
     
 # return formatting:
 # for fold, return 'fold'
 # for raise, return 'raise {amount}' e.g 'raise 10'
 # for call, return 'call'
 
+print(play({'name': 'Jacob', 'hand': ['5D' '5C'], 'funds': 50, 'current_bet': 10, 'still_in': True, 'previous_play': ''}, ['5H', '8D', '8C'], 10, 3, True))
